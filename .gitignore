@@ -1,0 +1,20 @@
+# Mac
+.DS_Store
+
+# Vim
+*~
+*.swp
+
+# TeX
+*.aux
+*.bbl
+*.blg
+*.idx
+*.ind
+*.log
+*.lot
+*.out
+*.toc
+*.lof
+
+
