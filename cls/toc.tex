@@ -1,0 +1,88 @@
+%	T O C  C U S T O M I Z A T I O N
+%
+\contentsmargin[1cm]{0cm}
+\titlecontents*{part}[0em]
+	{\large\scshape}
+	{\scshape\thecontentslabel}
+	{\vskip 4pt\large\scshape\lowercase}
+	{}[\vskip 0pt]
+\titlecontents{chapter}[0em]
+	{\large\vspace{8pt}}
+	{\makebox[-1em][r]{\bfseries\large\thecontentslabel}\large\hspace{1em}}
+	{\large}
+	{~~~\textcolor{niceBlue}{\contentspage}}[\vskip 2pt]
+\titlecontents*{section}[0em]
+	{\vskip 0pt\large}
+	{{\thecontentslabel}~~\itshape}
+	{\itshape}
+	{~~\textcolor{niceBlue}{\contentspage}}
+	[\\]
+% \titlecontents{subsection}[0em]
+% 	{\vspace{4pt}}
+% 	{\normalfont\thecontentslabel\enspace\itshape}
+% 	{\itshape}
+% 	{\qquad\contentspage}[\vskip 0pt]
+% \titlecontents*{subsection}[0em]
+% 	{\vskip 0pt\small}
+% 	{{\thecontentslabel}~~\itshape}
+% 	{\itshape}
+% 	{~~{\contentspage}}
+% 	[\qquad]
+% \titlecontents{subsubsection}[1em]
+% 	{\vspace{0pt}}
+% 	{\normalfont\thecontentslabel\enspace\itshape}
+% 	{\itshape}
+% 	{\quad\quad\contentspage}[\vskip 0pt]
+
+% TOCLOFT (stolen from classicthesis)
+\renewcommand{\cftfigpresnum}{\scshape\MakeTextLowercase}%
+\renewcommand{\cftfigfont}{\normalfont}%
+\renewcommand{\cftfigleader}{\hspace{2.5em}}%
+\renewcommand{\cftfigafterpnum}{\cftparfillskip}%
+\renewcommand{\cftfigpresnum}{\figurename~}%Fig.~}
+\newlength{\figurelabelwidth}
+\settowidth{\figurelabelwidth}{\cftfigpresnum~999}
+\addtolength{\figurelabelwidth}{1em}
+\cftsetindents{figure}{0em}{\figurelabelwidth}
+% tables
+\renewcommand{\cfttabfont}{\normalfont}%
+\renewcommand{\cfttableader}{\hspace{2.5em}}%
+\renewcommand{\cfttabafterpnum}{\cftparfillskip}%
+\renewcommand{\cfttabpresnum}{\tablename~}%Tab.~}
+\newlength{\tablelabelwidth}
+\settowidth{\tablelabelwidth}{\cfttabpresnum~999}
+\addtolength{\tablelabelwidth}{1em}
+%\cftsetindents{table}{0em}{\tablelabelwidth}
+\cftsetindents{table}{0em}{\figurelabelwidth}
+% listings
+\newcommand\listingsname{Listing}
+\renewcommand\lstlistingname{Listing}
+\renewcommand\lstlistlistingname{List of Listings}
+\newlistof{listings}{lol}{\lstlistlistingname}%
+\renewcommand{\cftlistingspresnum}{\scshape\MakeTextLowercase}%
+\renewcommand{\cftlistingsfont}{\normalfont}%
+\renewcommand{\cftlistingspresnum}{\lstlistingname~}%
+\renewcommand{\cftlistingspagefont}{\normalfont}%
+\renewcommand{\cftlistingsleader}{\hspace{1.5em}}%
+\renewcommand{\cftlistingsafterpnum}{\cftparfillskip}%
+\newlength{\listingslabelwidth}%
+\settowidth{\listingslabelwidth}{\cftlistingspresnum~999}%
+\addtolength{\listingslabelwidth}{2.5em}%
+\cftsetindents{listings}{0em}{\figurelabelwidth}%
+% \let\l@lstlisting\l@listings%
+\let\lstlistoflistings\listoflistings%
+% blue page numbers
+\renewcommand{\cftfigpagefont}{\color{niceBlue}}
+\renewcommand{\cfttabpagefont}{\color{niceBlue}}
+\renewcommand{\cftlistingspagefont}{\color{niceBlue}}
+% TOCLOFT over
+%	toc offset
+\let\oldtoc\tableofcontents
+\renewcommand{\tableofcontents}{%
+	\begin{quote}\setstretch{1.0}
+	\oldtoc
+	\end{quote}
+}
+%	toc depth
+\AtBeginDocument{\setcounter{tocdepth}{1}}
+

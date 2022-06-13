@@ -6,6 +6,7 @@
 *.swp
 
 # TeX
+build
 *.aux
 *.bbl
 *.blg

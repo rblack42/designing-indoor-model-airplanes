@@ -1,0 +1,145 @@
+%	M A K E T I T L E
+%
+
+% 	custom info commands like @title, @author...
+% 	info commands definition
+\makeatletter
+% 	subtitle --title already exists
+\newcommand\subtitle[1]{\renewcommand\@subtitle{#1}}
+\newcommand\@subtitle{}
+% 	university
+\newcommand\university[1]{\renewcommand\@university{#1}}
+\newcommand\@university{}
+% 	lab
+\newcommand\lab[1]{\renewcommand\@lab{#1}}
+\newcommand\@lab{}
+
+% 	supervisors, jury members, etc.
+\newcommand\people{}
+\def\zfoo#1\relax{\long\def\people##1{#1}}
+\newcommand\updatepeople[1]{%
+   \expandafter\zfoo\people{##1}##1#1\relax
+}
+\newcommand\person[3]{
+    \updatepeople{#1 & #2 & #3 \\}
+}
+
+%	logos
+\newcommand\logos{}
+\def\xfoo#1\relax{\long\def\logos##1{#1}}
+\newcommand\updatelogos[1]{%
+   \expandafter\xfoo\logos{##1}##1#1\relax
+}
+\newcommand\logo[1]{
+    \updatelogos{
+		\hspace{20pt}\includegraphics[height=50pt]{#1}
+	}
+}
+
+% 	Doctoral thesis (subsubtitle)
+\newcommand\type[1]{\renewcommand\@type{#1}}
+\newcommand\@type{Doctoral thesis}
+
+% 	shoutouts
+\newcommand\shoutouts[1]{\renewcommand\@shoutouts{#1}}
+\newcommand\@shoutouts{}
+
+% 	ACTUAL MAKETITLE (titlepage + "copyright" and dedication pages)
+\newcommand\@maketitlebis{%
+	\makeatletter
+	\setstretch{1.0}
+	\begin{titlepage}
+		% \setcounter{page}{1}
+		\loadgeometry{titlepage}
+		\hfill
+		\begin{minipage}{.8\linewidth}
+		\raggedleft
+
+		{\large\scshape
+				\MakeLowercase{\@university}%
+
+				\bigskip
+
+				\MakeLowercase{\@lab}%  <- this percent is mandatory -- without it latex places and awkward space
+		}
+
+		\vskip 80pt
+
+		{\large\itshape\@author}
+
+		\vskip 40 pt
+
+		{%
+			\huge
+			\if@colorful
+				\color{niceRed}
+			\else
+			\fi
+			\@title\par
+			}%
+
+		\vskip 8pt
+
+		{\large\@subtitle\par}%
+
+		\vskip 70pt
+
+		{\itshape\@date}
+
+		\end{minipage}
+
+		\vfill
+
+		\raggedleft
+
+		\begin{tabular}{rll}
+			\people{}
+		\end{tabular}
+
+		\vskip 40pt
+
+		\logos{}
+
+	\end{titlepage}
+
+	\if@colorful
+		\hypersetup{
+			colorlinks = true,
+			linkcolor = niceBlue,
+			anchorcolor = niceBlue,
+			citecolor = .,
+			urlcolor = niceBlue,
+		}
+	\fi
+
+	% copyright
+	\loadgeometry{evenmargins}
+	\thispagestyle{empty}
+	\hfill
+	\vfill
+	\makeatletter
+	\noindent\begin{flushleft}\@author,\quad \textit{\@title,} \@subtitle, \@date.
+    \end{flushleft}
+	\makeatother
+
+	\loadgeometry{regular}
+
+	% dedication
+	\cleardoublepage
+	\thispagestyle{empty}
+	\loadgeometry{evenmargins}
+	~\vskip .3\textheight
+	\begin{flushright}
+	\large\itshape\@shoutouts
+	\end{flushright}
+	\loadgeometry{regular}
+
+	\setstretch{1.12}
+	\makeatother
+}
+\renewcommand\maketitle{
+	\@maketitlebis
+	\thispagestyle{empty}
+}
+\makeatother
+

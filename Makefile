@@ -1,9 +1,12 @@
 .PHONY: book
 book:
-	pdflatex main.tex
-	bibtex main
-	texindy --language english main.idx
-	pdflatex main
-	pdflatex main
-	pdflatex main
+	pdflatex --output-directory=build main
+	biber --output-directory build main
+	texindy --language english build/main.idx
+	pdflatex --output-directory=build main
+	pdflatex --output-directory=build main
+
+.PHONY: clean
+clean:
+	rm -rf build
 

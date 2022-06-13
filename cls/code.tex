@@ -1,0 +1,100 @@
+%	C O D E
+%
+%   colors
+\definecolor{bg}{rgb}{.95,.95,.95}
+\definecolor{key}{HTML}{333399}
+\definecolor{comment}{HTML}{6b6b99}
+\definecolor{codegray}{rgb}{0.4,0.4,0.4}
+\definecolor{string}{HTML}{2b4f2b}
+%   boxes
+\mdfdefinestyle{code_box}{%
+    roundcorner= 2pt,
+	backgroundcolor=white,
+    linecolor = lightgray,
+    linewidth = .5pt,
+    topline = true,
+    bottomline = true,
+    leftline = true,
+    rightline = true,
+	innertopmargin=.2em,
+	innerbottommargin=.2em,
+}
+%   listing styles
+\lstdefinestyle{unnumbered}{
+    commentstyle=\color{comment},
+    keywordstyle=\color{key},
+    stringstyle=\color{string},
+    basicstyle=\ttfamily\normalsize\lst@ifdisplaystyle\small\fi,
+    breakatwhitespace=false,
+    breaklines=true,
+    keepspaces=true,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4,
+    framexleftmargin=30pt,
+}
+\lstdefinestyle{numbered}{
+    commentstyle=\color{comment},
+    keywordstyle=\color{key},
+    stringstyle=\color{string},
+    basicstyle=\ttfamily\normalsize\lst@ifdisplaystyle\small\fi,
+    breakatwhitespace=false,
+    breaklines=true,
+    keepspaces=true,
+    numbers=left,
+    numberstyle = \color{codegray}\footnotesize\ttfamily,
+    numbersep=10pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4,
+    framexleftmargin=30pt,
+    framextopmargin=100pt,
+    framexbottommargin=30pt,
+}
+%   code macros
+\lstnewenvironment{codebox}[1]{%
+	\FloatBarrier
+	\mdframed[style = code_box, innerleftmargin=10pt]%
+	\lstset{style=unnumbered, language=#1}
+}
+{
+    \endmdframed
+}
+\lstnewenvironment{altcodebox}[1]{%
+	\FloatBarrier
+	\mdframed[style = code_box, innerleftmargin=10pt]%
+	\lstset{style=unnumbered, language=#1}
+}
+{
+    \endmdframed
+}
+\lstnewenvironment{codeboxnum}[1]{%
+	\FloatBarrier
+	\mdframed[style = code_box, innerleftmargin=25pt]%
+	\lstset{style=numbered, language=#1}
+}
+{
+    \endmdframed
+}
+\newcommand{\inlinecode}[1]{\lstinline[style=unnumbered, language=#1]}
+%	snippet environments
+\lstnewenvironment{snippet}[3]{%
+	\marginpar{~\vskip 10pt\captionof{listings}{#2\label{#3}}}
+	\mdframed[style = code_box, innerleftmargin=10pt]%
+	\lstset{style=unnumbered, language=#1}
+}
+{
+    \endmdframed
+}
+\lstnewenvironment{snippetnum}[3]{%
+	\marginpar{~\vskip 10pt\captionof{listings}{#2\label{#3}}}
+	\mdframed[style = code_box, innerleftmargin=25pt]%
+	\lstset{style=numbered, language=#1}
+}
+{
+    \endmdframed
+}
+
+

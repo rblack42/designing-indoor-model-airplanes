@@ -1,0 +1,108 @@
+%	F I G U R E S  A N D  S T U F F
+%
+% 	caption formatting
+\DeclareCaptionLabelFormat{lc}{\MakeLowercase{#1}~#2}
+\DeclareCaptionLabelSeparator{mysep}{.\quad}
+\captionsetup{
+	labelfont = {bf},
+	%labelformat = lc,
+	labelsep = mysep,
+	justification=RaggedRight,
+	font={footnotesize, stretch=1},
+	singlelinecheck=on,
+}
+\DeclareCaptionStyle{sidecaption}{
+    labelfont = {bf},
+	%labelformat = lc,
+	labelsep = mysep,
+	justification=RaggedRight,
+	font={footnotesize, stretch=1},
+	singlelinecheck=off,
+}
+\DeclareCaptionStyle{marginfigure}{
+    labelfont = {bf},
+	%labelformat = lc,
+	labelsep = mysep,
+	justification=RaggedRight,
+	font={footnotesize, stretch=1},
+	singlelinecheck=off,
+}
+\DeclareCaptionStyle{widefigure}{
+    labelfont = {bf},
+	%labelformat = lc,
+	labelsep = mysep,
+	justification=RaggedRight,
+	font={footnotesize, stretch=1},
+	singlelinecheck=off,
+}
+\DeclareCaptionStyle{margintable}{
+    labelfont = {bf},
+	%labelformat = lc,
+	labelsep = mysep,
+	justification=RaggedRight,
+	font={footnotesize, stretch=1},
+	singlelinecheck=off,
+}
+\DeclareCaptionStyle{widetable}{
+    labelfont = {bf},
+	%labelformat = lc,
+	labelsep = mysep,
+	justification=RaggedRight,
+	font={footnotesize, stretch=1},
+	singlelinecheck=off,
+}
+%	figure macros
+\AtBeginDocument{\usepackage[export]{adjustbox}} % for 'outer' mode
+\newcommand{\textfig}[4][]{%
+	\FloatBarrier
+	\begin{figure}[!htb]%
+		\sidecaption{#3\label{#4}}%
+		\includegraphics[width = #1\linewidth, outer]{#2}%
+	\end{figure}%
+}
+\newcommand{\marginfig}[3]{%
+	\FloatBarrier%
+	\begin{marginfigure}%
+		\includegraphics[width = \linewidth]{#1}%
+		\caption{#2\label{#3}}%
+	\end{marginfigure}%
+}
+\newcommand{\widefig}[4][]{%
+	\FloatBarrier%
+	\begin{figure*}[!htb]%
+		\includegraphics[width=#1\linewidth, outer]{#2}%
+		\sidecaption{#3\label{#4}}%
+	\end{figure*}%
+}
+\newcommand{\plainfig}[4][]{%
+	\FloatBarrier%
+	\begin{figure}[!htb]%
+		\includegraphics[width=#1\linewidth, left]{#2}%
+		\caption{#3\label{#4}}%
+	\end{figure}%
+}
+\newcommand{\plainwidefig}[4][]{%
+	\FloatBarrier%
+	\begin{figure*}[!htb]%
+		\includegraphics[width=#1\linewidth, left]{#2}%
+		\caption{#3\label{#4}}%
+	\end{figure*}%
+}
+%	table macros
+\newcolumntype{Y}{>{\centering\arraybackslash}X} % tabularx column type
+\newenvironment{texttable}[2]{%
+	\begingroup%
+	\small%
+	\marginpar{%
+		\vskip 8pt%
+		\captionof{table}{#1}%
+		\label{#2}%
+	}
+
+	\noindent%
+}
+{
+	\endgroup%
+}
+
+
